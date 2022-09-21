@@ -10,6 +10,7 @@ interface IChartConfig {
 const chartConfig: IChartConfig = {
   type: 'line',
   data: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     labels: data.map((item: Record<any, any>) => moment(item.x * 1000)),
     datasets: [
       {
@@ -90,7 +91,7 @@ const chartConfig: IChartConfig = {
           label: (ctx) => {
             return ctx.formattedValue + 'K';
           },
-          labelTextColor: (tooltipItem) => {
+          labelTextColor: (_tooltipItem) => {
             return '#fff';
           },
         },

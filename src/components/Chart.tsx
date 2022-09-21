@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -11,10 +12,9 @@ import {
   Tooltip,
 } from 'chart.js';
 import 'chartjs-adapter-moment';
-import { useRef } from 'react';
+import moment from 'moment';
 import { Line } from 'react-chartjs-2';
 import chartConfig from './Chart.config';
-import moment from 'moment';
 //register
 ChartJS.register(
   CategoryScale,
@@ -47,21 +47,13 @@ ChartJS.register(
 
         ctx.stroke();
 
-        //draw card
-        ctx.save();
-        //move to end of chart-area
-        ctx.beginPath();
-        ctx.moveTo(point, topY);
-        ctx.fillStyle = '#fab';
-        ctx.fillRect(point - 50, bottomY, 100, 20);
+        ctx.fillStyle = '#1fc7d4';
+        ctx.fillRect(point - 50, bottomY + 10, 100, 20);
         ctx.restore();
 
-        ctx.save();
-        ctx.beginPath();
-        // ctx.moveTo(point, bottomY);
         ctx.fillStyle = '#000';
         const day = tooltip && moment(tooltip.dataPoints[0].label).format('L');
-        ctx.fillText(`${day}`, point, bottomY + 15);
+        ctx.fillText(`${day}`, point, bottomY + 25);
         ctx.textAlign = 'center';
       }
     },
@@ -69,11 +61,9 @@ ChartJS.register(
 );
 
 const LineChart = ({}) => {
-  const chartRef = useRef<any>(null);
-
   return (
     <>
-      <Line id="line-chart" width={'500px'} options={chartConfig.options} data={chartConfig.data} ref={chartRef}></Line>
+      <Line id="line-chart" width={'500px'} options={chartConfig.options} data={chartConfig.data} />
     </>
   );
 };
