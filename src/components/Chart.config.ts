@@ -23,15 +23,14 @@ const chartConfig: IChartConfig = {
       },
     ],
   },
+
   options: {
     interaction: {
       intersect: false,
       mode: 'index',
     },
-
     scales: {
       //custom  yAxis
-
       y: {
         title: {
           display: true,
@@ -39,13 +38,13 @@ const chartConfig: IChartConfig = {
         },
         ticks: {
           stepSize: 10000,
-          callback: (_, tickValue: number): any => {
+          callback: (_, tickValue: number): string => {
             if (tickValue === 0) {
               return '';
             }
             return tickValue * 10 + 'K';
           },
-          padding: 10,
+          padding: 25,
         },
         beginAtZero: true,
         grid: {
@@ -61,7 +60,6 @@ const chartConfig: IChartConfig = {
           display: true,
           text: 'Month',
         },
-
         type: 'time',
         time: {
           unit: 'month',
@@ -76,6 +74,7 @@ const chartConfig: IChartConfig = {
             }
             return moment(value).format('MMM');
           },
+          padding: 25,
         },
       },
     },
@@ -83,6 +82,31 @@ const chartConfig: IChartConfig = {
     plugins: {
       tooltip: {
         enabled: true,
+        textDirection: 'rtl',
+        callbacks: {
+          title: () => {
+            return '';
+          },
+          label: (ctx) => {
+            return ctx.formattedValue + 'K';
+          },
+          labelTextColor: (tooltipItem) => {
+            return '#fff';
+          },
+        },
+        animation: {
+          duration: 0,
+        },
+        caretSize: 0,
+        displayColors: false,
+        backgroundColor: '#1fc7d4',
+        caretPadding: 10,
+        xAlign: (ctx, options) => {
+          return 'center';
+        },
+        yAlign: (ctx, options) => {
+          return 'bottom';
+        },
       },
       legend: {
         display: false,
