@@ -14,7 +14,7 @@ import {
 import 'chartjs-adapter-moment';
 import moment from 'moment';
 import { Line } from 'react-chartjs-2';
-import chartConfig from './Chart.config';
+import chartStream from './ChartStream.config';
 import ChartStreaming from 'chartjs-plugin-streaming';
 
 //register
@@ -28,6 +28,7 @@ ChartJS.register(
   Legend,
   TimeScale,
   TimeSeriesScale,
+  ChartStreaming,
   {
     id: 'line-chart',
     afterDraw: (chart) => {
@@ -63,12 +64,12 @@ ChartJS.register(
   }
 );
 
-const LineChart = ({}) => {
+const ChartStream = ({}) => {
   return (
     <>
-      <Line id="line-chart" width={'500px'} options={chartConfig.options} data={chartConfig.data} />
+      <Line id="line-chart" width={'500px'} options={chartStream.options} data={chartStream.data} />
     </>
   );
 };
 
-export default LineChart;
+export default ChartStream;
